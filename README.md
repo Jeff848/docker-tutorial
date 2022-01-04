@@ -131,8 +131,18 @@ Other important commands
 
 `VOLUME` allows you to store stuff on the host file system instead of the containers, adding persistent data to the container. This directory isn't removed on docker rm, but it is removed on docker run --rm.
 
+For best practice, it is recommended to minimize the number of layers, as the docker overhead adds up. This includes doing [multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) and coalescing commands into single layers.
+
 ## Docker compose
 
 Docker compose is a tool to set up and run multiple Docker containers without most of the hassle. It does this with an overarching docker-compose.yaml file in the root directory of a project, where the other subdirectories would have different projects with their own DockerFiles.
 
 Check the docker-compose.yml file
+
+Most of the "concepts" shown here should be familiar. Each services is its own container, and it can either be created from a pre-existing image or one that is built. 
+
+Try launching up the docker containers with `docker-compose up -d `
+
+You should see that this does all the work of `docker run` for you.
+
+Docker-compose files can get alot more complex. Check the [documentation](https://docs.docker.com/compose/compose-file/) to learn some more about them.
