@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  web:
+    build: ./composetest
+    container_name: app
+    ports:
+      - "5000:5000"
+    environment:
+      SHOW: 'true'
+  redis:
+    image: "redis:alpine"
+    deploy:
+      replicas: 1
+    secrets:
+      - my_secret
+    volumes:
+      - redis_data:/data
+volumes:
+  redis_data:
+secrets:
+  my_secret:
+    file: ./secret.txt
+    
